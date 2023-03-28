@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.5.12</version>
+		<relativePath/>
+	</parent>
+
+	<groupId>com.wusong.wsframework</groupId>
+	<artifactId>wsframework-build</artifactId>
+	<version>2.0.0.RC2-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>wsframework-build</name>
+	<description>
+		这是所有子模块的root pom的parent。包含构建wsframework所需的依赖项目。
+	</description>
+	<modules>
+		<module>wsframework-build-dependencies</module>
+		<module>wsframework-dependencies-parent</module>
+	</modules>
+	<properties>
+		<java.version>8</java.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<wsframework.version>2.0.0.RC2-SNAPSHOT</wsframework.version>
+	</properties>
+	<organization>
+		<name>WuSong</name>
+		<url>http://confluence.wusong.com/pages/viewpage.action?pageId=61178637</url>
+	</organization>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.wusong.wsframework</groupId>
+				<artifactId>wsframework-build-dependencies</artifactId>
+				<version>${wsframework.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<!-- 发布maven私服 -->
+	<distributionManagement>
+		<repository>
+			<id>ws-release</id>
+			<name>ws-release</name>
+			<url>http://nexus.wusong.com/repository/ws-repo-releases/</url>
+		</repository>
+		<snapshotRepository>
+			<id>ws-snapshots</id>
+			<name>ws-snapshots</name>
+			<url>http://nexus.wusong.com/repository/ws-repo-snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
+
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>${maven-source-plugin.version}</version>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+						<phase>package</phase>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+		<pluginManagement>
+		</pluginManagement>
+	</build>
+
+</project>

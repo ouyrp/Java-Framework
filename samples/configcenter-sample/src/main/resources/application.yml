@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: infrastructure-configcenter-sample
+## 发布时，CMDB_URL 和 CMDB_SK 在 K8S中会自动配置好。
+## 日常开发时，只要指定 spring.profiles.active=dev 即可。dev环境框架会自动配置，其它环境请联系运维获取正确的 CMDB_SK 和 CMDB_URL
+CMDB_URL: https://wusongcmdbservice-offline.wusong.com
+#CMDB_SK: infra

@@ -1,0 +1,13 @@
+package com.wusong.uc.common;
+
+/**
+ * javadoc IComponent
+ * <p>
+ *     sdk组件标志
+ * <p>
+ * @author weng xiaoyong
+ * @date 2022/3/1 7:49 PM
+ * @version 1.0.0
+ **/
+public interface IComponent {
+}

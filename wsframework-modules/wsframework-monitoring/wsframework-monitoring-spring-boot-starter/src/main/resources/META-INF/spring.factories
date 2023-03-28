@@ -1,0 +1,15 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.wusong.monitoring.MonitorAutoConfiguration,\
+com.wusong.monitoring.metric.prometheus.PrometheusAutoConfiguration,\
+com.wusong.monitoring.metric.micrometer.autoconfigure.MicrometerAutoConfiguration,\
+com.wusong.monitoring.metric.micrometer.autoconfigure.JVMAutoConfiguration,\
+com.wusong.monitoring.metric.micrometer.autoconfigure.ThreadPoolAutoConfiguration,\
+com.wusong.monitoring.metric.micrometer.autoconfigure.DataSourceMetricAutoConfiguration,\
+com.wusong.monitoring.metric.micrometer.autoconfigure.DatabaseStatusAutoConfiguration,\
+com.wusong.monitoring.metric.micrometer.autoconfigure.RestTemplateAutoConfiguration,\
+com.wusong.monitoring.metric.micrometer.autoconfigure.MicroserviceAutoConfiguration,\
+com.wusong.monitoring.loging.P6DataSourceAutoConfiguration,\
+com.wusong.monitoring.metric.micrometer.autoconfigure.DataSourceAutoConfiguration
+
+org.springframework.boot.SpringApplicationRunListener=\
+com.wusong.monitoring.metric.micrometer.MonitorConfigSpringApplicationRunListener

@@ -1,0 +1,20 @@
+{
+  "properties": [
+    {
+      "name": "wsframework.uc.app-id",
+      "type": "java.lang.String",
+      "description": "UC接入申请的appId."
+    },
+    {
+      "name": "wsframework.uc.interceptors-path-patterns",
+      "type": "java.lang.String",
+      "description": "拦截器权限校验的url匹配规则.",
+      "defaultValue": "/**"
+    },
+    {
+      "name": "wsframework.uc.interceptors-exclude-path-patterns",
+      "type": "java.lang.String",
+      "description": "拦截器排除权限校验的url匹配规则."
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.wusong.wsframework</groupId>
+        <artifactId>wsframework-build</artifactId>
+        <version>2.0.0.RC2-SNAPSHOT</version>
+        <relativePath/>
+    </parent>
+    <version>2.0.0.RC2-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <artifactId>wsframework-modules</artifactId>
+    <modules>
+        <module>wsframework-common</module>
+        <module>wsframework-configcenter</module>
+        <module>wsframework-configmaptools</module>
+        <module>wsframework-jobcenter</module>
+        <module>wsframework-monitoring</module>
+        <module>wsframework-mysql</module>
+        <module>wsframework-redis</module>
+        <module>wsframework-web</module>
+        <module>wsframework-es</module>
+        <module>wsframework-kafka</module>
+        <module>wsframework-rocketmq</module>
+        <module>wsframework-mongodb</module>
+        <module>wsframework-uc</module>
+    </modules>
+</project>

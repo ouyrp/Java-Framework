@@ -1,0 +1,110 @@
+<configuration>
+  <springProperty scope="context" name="app.name" source="spring.application.name" />
+  <property name="log.filePath" value="./logs"/>
+  <property name="log.pattern"
+            value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%thread] [%-5level] [%logger{40}] - %X{reqId} %msg%n"/>
+  <conversionRule conversionWord="msg" converterClass="com.wusong.monitoring.loging.MaxLengthMessageConverter"/>
+
+  <appender name="ROLLING_INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>${log.filePath}/${app.name}.log</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+      <fileNamePattern>${log.filePath}/${app.name}-%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+      <maxFileSize>10MB</maxFileSize>
+      <maxHistory>20</maxHistory>
+      <totalSizeCap>200MB</totalSizeCap>
+    </rollingPolicy>
+    <encoder  class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+      <layout class="ch.qos.logback.classic.PatternLayout">
+        <pattern>${log.pattern}</pattern>
+      </layout>
+      <charset>UTF-8</charset>
+    </encoder>
+    <filter class="ch.qos.logback.classic.filter.LevelFilter">
+      <level>ERROR</level>
+      <onMatch>DENY</onMatch>
+      <onMismatch>ACCEPT</onMismatch>
+    </filter>
+  </appender>
+
+  <appender name="ROLLING_ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>${log.filePath}/${app.name}.error.log</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+      <fileNamePattern>${log.filePath}/${app.name}-%d{yyyy-MM-dd}.%i.error.log.gz</fileNamePattern>
+      <maxFileSize>10MB</maxFileSize>
+      <maxHistory>20</maxHistory>
+      <totalSizeCap>200MB</totalSizeCap>
+    </rollingPolicy>
+    <filter class="ch.qos.logback.classic.filter.LevelFilter">
+      <level>ERROR</level>
+      <onMatch>ACCEPT</onMatch>
+      <onMismatch>DENY</onMismatch>
+    </filter>
+    <encoder  class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+      <layout class="ch.qos.logback.classic.PatternLayout">
+        <pattern>${log.pattern}</pattern>
+      </layout>
+      <charset>UTF-8</charset>
+    </encoder>
+  </appender>
+
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder  class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+      <layout class="ch.qos.logback.classic.PatternLayout">
+        <pattern>${log.pattern}</pattern>
+      </layout>
+      <charset>UTF-8</charset>
+    </encoder>
+  </appender>
+  
+  <appender name="KAFKA_INFO" class="com.wusong.monitoring.loging.kafka.KafkaAppender">
+    <appender-ref ref="ROLLING_INFO" />
+    <filter class="ch.qos.logback.classic.filter.LevelFilter">
+      <level>ERROR</level>
+      <onMatch>DENY</onMatch>
+      <onMismatch>ACCEPT</onMismatch>
+    </filter>
+  </appender>
+  
+  <appender name="KAFKA_ERROR" class="com.wusong.monitoring.loging.kafka.KafkaAppender">
+    <appender-ref ref="ROLLING_ERROR" />
+    <filter class="ch.qos.logback.classic.filter.LevelFilter">
+      <level>ERROR</level>
+      <onMatch>ACCEPT</onMatch>
+      <onMismatch>DENY</onMismatch>
+    </filter>
+  </appender>
+
+  <appender name="KAFKA_STDOUT_ignore" class="com.wusong.monitoring.loging.kafka.KafkaAppender">
+    <appender-ref ref="STDOUT" />
+  </appender>
+
+  <appender name="ASYNC_STDOUT" class="ch.qos.logback.classic.AsyncAppender">
+<!--    <appender-ref ref="STDOUT" />-->
+    <appender-ref ref="KAFKA_STDOUT_ignore" />
+    <queueSize>10000</queueSize>
+    <neverBlock>true</neverBlock>
+    <discardingThreshold>10</discardingThreshold>
+  </appender>
+
+  <appender name="ASYNC_ROLLING_INFO" class="ch.qos.logback.classic.AsyncAppender">
+<!--    <appender-ref ref="ROLLING_INFO" />-->
+    <appender-ref ref="KAFKA_INFO" />
+    <queueSize>10000</queueSize>
+    <neverBlock>true</neverBlock>
+    <discardingThreshold>10</discardingThreshold>
+  </appender>
+  <appender name="ASYNC_ROLLING_ERROR" class="ch.qos.logback.classic.AsyncAppender">
+<!--    <appender-ref ref="ROLLING_ERROR" />-->
+    <appender-ref ref="KAFKA_ERROR" />
+    <queueSize>10000</queueSize>
+    <neverBlock>true</neverBlock>
+    <discardingThreshold>10</discardingThreshold>
+  </appender>
+
+  <root level="info">
+    <appender-ref ref="ASYNC_STDOUT" />
+    <appender-ref ref="ASYNC_ROLLING_INFO" />
+    <appender-ref ref="ASYNC_ROLLING_ERROR" />
+  </root>
+
+</configuration>

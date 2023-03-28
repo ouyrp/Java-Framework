@@ -1,0 +1,33 @@
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.wusong.wsframework</groupId>
+        <artifactId>wsframework-build</artifactId>
+        <version>2.0.0.RC2-SNAPSHOT</version>
+        <relativePath/>
+    </parent>
+    <version>2.0.0.RC2-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <artifactId>wsframework-redis</artifactId>
+    <modules>
+        <module>wsframework-redis-dependencies</module>
+<!--        <module>wsframework-redis-core</module>-->
+        <module>wsframework-redis-redisson</module>
+        <module>wsframework-redis-spring-boot-starter</module>
+    </modules>
+    <properties>
+    </properties>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.wusong.wsframework</groupId>
+                <artifactId>wsframework-redis-dependencies</artifactId>
+                <version>${wsframework.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+</project>
